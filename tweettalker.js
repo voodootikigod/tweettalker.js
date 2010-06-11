@@ -7,6 +7,9 @@ var twit = new TwitterNode({  user: config.twitter.account
                               , track: config.twitter.terms
                           });
 
+function html_decode(txt) {
+  return txt.replace("&lt;", "<").replace("&gt;", ">").replace("&amp;", "&");
+}
 
 twit.addListener('tweet', function(tweet) {
    talker.say([tweet.user.screen_name, " said ", html_decode(tweet.text)].join(""));
